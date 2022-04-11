@@ -1,12 +1,6 @@
 const { expect, util } = require("chai");
 const { ethers } = require("hardhat");
 
-// let provider;
-
-// before(async function(){
-//   provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");
-// });
-
 describe("Re-Entrancy", function () {
   it("EtherStore合约被撸空", async function () {
     const EtherStore = await ethers.getContractFactory("EtherStore");
@@ -35,7 +29,7 @@ describe("Re-Entrancy", function () {
   });
 
   it("重入攻击解决1:先写入变量,再外部调用",async function(){
-    const EtherStore = await ethers.getContractFactory("EtherStoreFix1");
+    const EtherStore = await ethers.getContractFactory("EtherStorePrev1");
     let store = await EtherStore.deploy();
     await store.deployed();
 
@@ -66,7 +60,7 @@ describe("Re-Entrancy", function () {
   });
 
   it("重入攻击解决2:使用防重入锁",async function(){
-    const EtherStore = await ethers.getContractFactory("EtherStoreFix2");
+    const EtherStore = await ethers.getContractFactory("EtherStorePrev2");
     let store = await EtherStore.deploy();
     await store.deployed();
 
