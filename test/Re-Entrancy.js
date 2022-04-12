@@ -9,7 +9,7 @@ describe("Re-Entrancy", function () {
 
     const [owner, addr1, addr2, addr3] = await ethers.getSigners();
 
-    const Attack = await ethers.getContractFactory("Attack");
+    const Attack = await ethers.getContractFactory("contracts/Re-Entrancy/Attack.sol:Attack");
     let attack = await Attack.deploy(store.address);
     await attack.deployed();
 
@@ -35,7 +35,7 @@ describe("Re-Entrancy", function () {
 
     const [owner, addr1, addr2, addr3] = await ethers.getSigners();
 
-    const Attack = await ethers.getContractFactory("Attack");
+    const Attack = await ethers.getContractFactory("contracts/Re-Entrancy/Attack.sol:Attack");
     let attack = await Attack.deploy(store.address);
     await attack.deployed();
 
@@ -48,11 +48,8 @@ describe("Re-Entrancy", function () {
 
     //attack
     attack = attack.connect(addr3);
-    try{
-      await attack.attack({value:ethers.utils.parseEther("1")});
-    }catch(error){
-      console.error(error);
-    }
+    await expect(attack.attack({value:ethers.utils.parseEther("1")}))
+          .to.be.revertedWith("Failed to send Ether,you guys probably have no balance!");
 
     //因为攻击交易会失败,attack中的deposit交易也失败,状态也会被revert,所以store中的balance是5
     expect(await store.getBalance()).to.equal(ethers.utils.parseEther("5"));
@@ -66,7 +63,7 @@ describe("Re-Entrancy", function () {
 
     const [owner, addr1, addr2, addr3] = await ethers.getSigners();
 
-    const Attack = await ethers.getContractFactory("Attack");
+    const Attack = await ethers.getContractFactory("contracts/Re-Entrancy/Attack.sol:Attack");
     let attack = await Attack.deploy(store.address);
     await attack.deployed();
 
@@ -79,11 +76,8 @@ describe("Re-Entrancy", function () {
 
     //attack
     attack = attack.connect(addr3);
-    try{
-      await attack.attack({value:ethers.utils.parseEther("1")});
-    }catch(error){
-      console.error(error);
-    }
+    await expect(attack.attack({value:ethers.utils.parseEther("1")}))
+        .to.be.revertedWith('Failed to send Ether,the lock is guarding!');
 
     //因为攻击交易会失败,attack中的deposit交易也失败,状态也会被revert,所以store中的balance是5
     expect(await store.getBalance()).to.equal(ethers.utils.parseEther("5"));
