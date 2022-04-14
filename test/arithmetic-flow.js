@@ -1,13 +1,13 @@
 const { expect, util } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("ArithmeticFlow", function () {
+describe("arithmetic-overflow-underflow", function () {
     it("时间锁失效,不需等一周,存入即可取", async function(){
         const TimeLock = await ethers.getContractFactory("TimeLock");
         const timeLock = await TimeLock.deploy();
         await timeLock.deployed();
 
-        const Attack = await ethers.getContractFactory("contracts/ArithmeticFlow/Attack.sol:Attack");
+        const Attack = await ethers.getContractFactory("contracts/arithmetic-overflow-underflow/Attack.sol:Attack");
         const attack = await Attack.deploy(timeLock.address);
         await attack.deployed();
 
@@ -22,7 +22,7 @@ describe("ArithmeticFlow", function () {
         const timeLock = await TimeLock.deploy();
         await timeLock.deployed();
 
-        const Attack = await ethers.getContractFactory("contracts/ArithmeticFlow/Attack.sol:Attack");
+        const Attack = await ethers.getContractFactory("contracts/arithmetic-overflow-underflow/Attack.sol:Attack");
         const attack = await Attack.deploy(timeLock.address);
         await attack.deployed();
 

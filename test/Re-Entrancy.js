@@ -1,7 +1,7 @@
 const { expect, util } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Re-Entrancy", function () {
+describe("re-entrancy", function () {
   it("EtherStore合约被撸空", async function () {
     const EtherStore = await ethers.getContractFactory("EtherStore");
     let store = await EtherStore.deploy();
@@ -9,7 +9,7 @@ describe("Re-Entrancy", function () {
 
     const [owner, addr1, addr2, addr3] = await ethers.getSigners();
 
-    const Attack = await ethers.getContractFactory("contracts/Re-Entrancy/Attack.sol:Attack");
+    const Attack = await ethers.getContractFactory("contracts/re-entrancy/Attack.sol:Attack");
     let attack = await Attack.deploy(store.address);
     await attack.deployed();
 
@@ -35,7 +35,7 @@ describe("Re-Entrancy", function () {
 
     const [owner, addr1, addr2, addr3] = await ethers.getSigners();
 
-    const Attack = await ethers.getContractFactory("contracts/Re-Entrancy/Attack.sol:Attack");
+    const Attack = await ethers.getContractFactory("contracts/re-entrancy/Attack.sol:Attack");
     let attack = await Attack.deploy(store.address);
     await attack.deployed();
 
@@ -63,7 +63,7 @@ describe("Re-Entrancy", function () {
 
     const [owner, addr1, addr2, addr3] = await ethers.getSigners();
 
-    const Attack = await ethers.getContractFactory("contracts/Re-Entrancy/Attack.sol:Attack");
+    const Attack = await ethers.getContractFactory("contracts/re-entrancy/Attack.sol:Attack");
     let attack = await Attack.deploy(store.address);
     await attack.deployed();
 

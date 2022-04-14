@@ -1,7 +1,7 @@
 const { ethers } = require("hardhat");
 const { expect } = require("chai");
 
-describe("Delegatecall",function(){
+describe("delegatecall",function(){
     it("HackMe的owner被修改为Attack的合约地址",async function(){
         const Lib = await ethers.getContractFactory("Lib");
         let lib = await Lib.deploy();
@@ -11,7 +11,7 @@ describe("Delegatecall",function(){
         let hackMe = await HackMe.deploy(lib.address);
         await hackMe.deployed();
 
-        const Attack = await ethers.getContractFactory("contracts/Delegatecall/Attack.sol:Attack");
+        const Attack = await ethers.getContractFactory("contracts/delegatecall/Attack.sol:Attack");
         let attack = await Attack.deploy(hackMe.address);
         await attack.deployed();    
         
@@ -32,7 +32,7 @@ describe("Delegatecall",function(){
         let hackMe = await HackMe.deploy(lib.address);
         await hackMe.deployed();
 
-        const Attack = await ethers.getContractFactory("contracts/Delegatecall/Attack.sol:Attack");
+        const Attack = await ethers.getContractFactory("contracts/delegatecall/Attack.sol:Attack");
         let attack = await Attack.deploy(hackMe.address);
         await attack.deployed();    
         

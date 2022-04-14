@@ -1,13 +1,13 @@
 const { ethers } = require("hardhat");
 const { expect } = require("chai");
 
-describe("SelfDestruct",function(){
+describe("selfdestruct",function(){
     it("EtherGame被攻击,不能再deposit,但也没有winner产生",async function(){
         const EtherGame = await ethers.getContractFactory("EtherGame");
         let game = await EtherGame.deploy();
         await game.deployed();
 
-        const Attack = await ethers.getContractFactory("contracts/SelfDestruct/Attack.sol:Attack");
+        const Attack = await ethers.getContractFactory("contracts/selfdestruct/Attack.sol:Attack");
         let attack = await Attack.deploy(game.address);
         await attack.deployed();
 
@@ -37,7 +37,7 @@ describe("SelfDestruct",function(){
         let game = await EtherGame.deploy();
         await game.deployed();
 
-        const Attack = await ethers.getContractFactory("contracts/SelfDestruct/Attack.sol:Attack");
+        const Attack = await ethers.getContractFactory("contracts/selfdestruct/Attack.sol:Attack");
         let attack = await Attack.deploy(game.address);
         await attack.deployed();
 
